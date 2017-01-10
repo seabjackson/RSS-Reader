@@ -104,6 +104,13 @@ class SearchFeedController: UICollectionViewController {
         return entryCell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = FeedDetailCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        controller.entryUrl = entries?[indexPath.item].url
+        navigationController?.pushViewController(controller, animated: true)
+        navigationController?.navigationBar.tintColor = UIColor.white
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! SearchHeader
         header.searchFeedController = self
