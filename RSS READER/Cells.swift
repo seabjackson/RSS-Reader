@@ -1,10 +1,9 @@
 //
-//  EntryCell.swift
-//  rssfeed
+//  Cells.swift
+//  RSS READER
 //
-//  Created by Brian Voong on 2/13/16.
-//  Copyright © 2016 letsbuildthatapp. All rights reserved.
-//
+//  Created by Seab on 1/9/17.
+//  Copyright © 2017 Seab Jackson. All rights reserved
 
 import UIKit
 
@@ -12,14 +11,14 @@ class EntryCell: BaseCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFontOfSize(14)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
     
     let contentSnippetTextView: UITextView = {
         let textView = UITextView()
-        textView.scrollEnabled = false
-        textView.userInteractionEnabled = false
+        textView.isScrollEnabled = false
+        textView.isUserInteractionEnabled = false
         return textView
     }()
     
@@ -41,7 +40,7 @@ class EntryCell: BaseCell {
         addConstraintsWithFormat("V:|-8-[v0(20)]-8-[v1][v2(0.5)]|", views: titleLabel, contentSnippetTextView, dividerView)
     }
     
-    override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         let attr: UICollectionViewLayoutAttributes = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
         
         var newFrame = attr.frame
@@ -50,7 +49,7 @@ class EntryCell: BaseCell {
         self.setNeedsLayout()
         self.layoutIfNeeded()
         
-        let desiredHeight: CGFloat = systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        let desiredHeight: CGFloat = systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         newFrame.size.height = desiredHeight + 20
         attr.frame = newFrame
         return attr
@@ -64,14 +63,14 @@ class SearchHeader: BaseCell, UITextFieldDelegate {
     let searchTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Search for RSS Feeds"
-        textField.font = UIFont.systemFontOfSize(14)
+        textField.font = UIFont.systemFont(ofSize: 14)
         return textField
     }()
     
     let searchButton: UIButton = {
-        let button = UIButton(type: .System)
-        button.setTitle("Search", forState: .Normal)
-        button.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
+        let button = UIButton(type: .system)
+        button.setTitle("Search", for: UIControlState())
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         return button
     }()
     
@@ -84,7 +83,7 @@ class SearchHeader: BaseCell, UITextFieldDelegate {
     override func setupViews() {
         super.setupViews()
         
-        searchButton.addTarget(self, action: "search", forControlEvents: .TouchUpInside)
+        searchButton.addTarget(self, action: #selector(SearchHeader.search), for: .touchUpInside)
         searchTextField.delegate = self
         
         addSubview(searchTextField)
@@ -102,7 +101,7 @@ class SearchHeader: BaseCell, UITextFieldDelegate {
         searchFeedController?.performSearchForText(searchTextField.text!)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchFeedController?.performSearchForText(searchTextField.text!)
         return true
     }
@@ -126,14 +125,15 @@ class BaseCell: UICollectionViewCell {
 }
 
 extension UIView {
-    func addConstraintsWithFormat(format: String, views: UIView...) {
+    func addConstraintsWithFormat(_ format: String, views: UIView...) {
         var viewsDictionary = [String: UIView]()
-        for (index, view) in views.enumerate() {
+        for (index, view) in views.enumerated() {
             let key = "v\(index)"
             viewsDictionary[key] = view
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
 }
+

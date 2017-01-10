@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:rssreader_starter.xcodeproj">
+      location = "self:RSS READER.xcodeproj">
    </FileRef>
 </Workspace>

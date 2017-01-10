@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>rssreader_starter.xcscheme</key>
+		<key>RSS READER.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>C79A82131C6FE48C00DBA01B</key>
+		<key>12457AF71E243CED0035EBD7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

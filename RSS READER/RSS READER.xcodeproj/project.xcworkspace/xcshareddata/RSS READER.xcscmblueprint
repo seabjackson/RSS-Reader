@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "43991E883ED2C3D694F5ED7452B45081DA49776B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "43991E883ED2C3D694F5ED7452B45081DA49776B" : 9223372036854775807,
+    "6E1E5AA360B088F8B27C23483EF3102F381337E3" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8F87C234-3F4C-46CB-8799-8D14AC0AEC09",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "43991E883ED2C3D694F5ED7452B45081DA49776B" : "RSS-Reader\/",
+    "6E1E5AA360B088F8B27C23483EF3102F381337E3" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "RSS READER",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "RSS READER\/RSS READER.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/seabjackson\/RSS-Reader.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "43991E883ED2C3D694F5ED7452B45081DA49776B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/seabjackson\/CookieCrush-Game.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6E1E5AA360B088F8B27C23483EF3102F381337E3"
+    }
+  ]
+}
