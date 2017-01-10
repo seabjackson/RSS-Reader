@@ -41,18 +41,10 @@ class EntryCell: BaseCell {
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        let attr: UICollectionViewLayoutAttributes = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
-        
-        var newFrame = attr.frame
-        self.frame = newFrame
-        
-        self.setNeedsLayout()
-        self.layoutIfNeeded()
-        
-        let desiredHeight: CGFloat = systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-        newFrame.size.height = desiredHeight + 20
-        attr.frame = newFrame
-        return attr
+        let attributes = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
+        let desiredHeight = systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        attributes.frame.size.height = desiredHeight
+        return attributes
     }
 }
 

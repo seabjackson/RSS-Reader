@@ -34,6 +34,8 @@ class SearchFeedController: UICollectionViewController {
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.minimumLineSpacing = 0
             layout.headerReferenceSize = CGSize(width: view.frame.width, height: 50)
+            // use estimated height to help the collectionView auto resize to fit content
+            layout.estimatedItemSize = CGSize(width: view.frame.width, height: 100)
         }
     }
     
@@ -49,22 +51,23 @@ class SearchFeedController: UICollectionViewController {
                 return
             }
             
-            let string = String(data: data!, encoding: String.Encoding.utf8)
+//            let string = String(data: data!, encoding: String.Encoding.utf8)
             
             do {
                 let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions()) as! [String: Any]
                 
                 let responseData = json["responseData"] as? NSDictionary
-                let entryDictionaries = responseData?["entries"] as? [NSDictionary]
-                
-                self.entries = [Entry]()
-                
-                for entryDictionary in entryDictionaries! {
-                    let title = entryDictionary["title"] as? String
-                    let contentSnippet = entryDictionary["contentSnippet"] as? String
-                    let url = entryDictionary["url"] as? String
-                    self.entries?.append(Entry(title: title, contentSnippet: contentSnippet, url: url))
+                if let entryDictionaries = responseData?["entries"] as? [NSDictionary] {
+                    self.entries = [Entry]()
+                    
+                    for entryDictionary in entryDictionaries {
+                        let title = entryDictionary["title"] as? String
+                        let contentSnippet = entryDictionary["contentSnippet"] as? String
+                        let url = entryDictionary["url"] as? String
+                        self.entries?.append(Entry(title: title, contentSnippet: contentSnippet, url: url))
+                    }
                 }
+                
                 // cells must be reloaded in the main thread since we are updating the UI
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
@@ -89,7 +92,15 @@ class SearchFeedController: UICollectionViewController {
         let entryCell = collectionView.dequeueReusableCell(withReuseIdentifier: entryCellId, for: indexPath) as! EntryCell
         let entry = entries?[indexPath.item]
         entryCell.titleLabel.text = entry?.title
-        entryCell.contentSnippetTextView.text = entry?.contentSnippet
+        let data = entry?.contentSnippet?.data(using: String.Encoding.unicode)
+        let options = [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType]
+        
+        do {
+            let htmlText = try NSAttributedString(data: data!, options: options, documentAttributes: nil)
+            entryCell.contentSnippetTextView.attributedText = htmlText
+        } catch let error {
+            print(error)
+        }
         return entryCell
     }
     
